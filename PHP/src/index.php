@@ -12,7 +12,7 @@
 
     $texto="Aldagaila";
     echo '<p>Kaixo Mundua, $texto</p><br>';
-    echo '<p>phpversion</p><br>'
+    echo '<p>phpversion</p><br>';
     /* Comentario*/
     echo '$zenb1+$zenb2<br>';
     var_dump($zenb1);
@@ -24,7 +24,7 @@
     funcion1();
 
     function funcion2(){
-        $GLOBALS['zenb1']=GLOBALS['zenb1']+GLOBALS['zenb2'];
+        $GLOBALS['zenb1']=$GLOBALS['zenb1']+$GLOBALS['zenb2'];
     }
     
     funcion2();
@@ -34,11 +34,9 @@
         static $x = 0;
         echo $x;
         $x++;
-      }
+    }
       
-      myTest();
-      myTest();
-      myTest();
+      
     ?>
 </body>
 </html>
