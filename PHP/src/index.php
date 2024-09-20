@@ -6,29 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-    //VOID Funtzio bat egitea
-    suma(1,2);
-    function suma($x, $y){
-        echo $x+$y;
-        echo "<br>";
-    }
-
-    $zenb1=2;
-    geitu_1($zenb1);
-    echo $zenb1;
-    echo "<br>";
-    geitu_2($zenb1);
-    echo $zenb1;
-    echo "<br>";
-    function geitu_1($zenb){
-        $zenb+=5;
-    }
     
-    function geitu_2(&$zenb){
-        $zenb+=5;
-    }
-    ?>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        Name:<input type="text"><br>
+        E-mail:<input type="text"><br>
+        <input type="submit">
+    </form>
+
+    <?php  echo $_GET["izena"]?>
 </body>
 </html>
 
