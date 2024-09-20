@@ -7,16 +7,27 @@
 </head>
 <body>
     <?php
-    echo "<table border='1'>";
-    $zenb1= array(array("Julen","Garcia","Mata"), array("Iker","Esnal","Etxebe"),array("Ana","Mata","Rodrigez"));
-    echo json_encode($zenb1, JSON_PRETTY_PRINT);
-    /*foreach ($zenb1 as $key) {
-        
-        foreach ($key as $key2) {
-            echo "<td>".$key2."</td>";
-        }
-    }*/
-    echo "</table>"
+    //VOID Funtzio bat egitea
+    suma(1,2);
+    function suma($x, $y){
+        echo $x+$y;
+        echo "<br>";
+    }
+
+    $zenb1=2;
+    geitu_1($zenb1);
+    echo $zenb1;
+    echo "<br>";
+    geitu_2($zenb1);
+    echo $zenb1;
+    echo "<br>";
+    function geitu_1($zenb){
+        $zenb+=5;
+    }
+    
+    function geitu_2(&$zenb){
+        $zenb+=5;
+    }
     ?>
 </body>
 </html>
