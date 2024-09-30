@@ -1,11 +1,12 @@
 <?php 
-    ob_start();
+    include 'konexioa.php';
+    //ob_start();
     $ondo=true;
     $izena;
     $gmail;
     $pasahitza;
-
-    if (isset($_COOKIE["Erabiltzaile_Izena"])){
+   
+    /*if (isset($_COOKIE["Erabiltzaile_Izena"])){
         if($_COOKIE["Erabiltzaile_Izena"]!==$izena){
             header("Location: index.html");
             exit;
@@ -13,7 +14,7 @@
     }else {
         header("Location: index.html");
             exit;
-    }
+    }*/
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         echo "Erabiltzailea:<br>";
@@ -33,15 +34,31 @@
             echo "Ez da email bat ".$_POST["email"];
             $ondo=false;
         }
-   
+
         echo "<br>";
         if (empty($_POST["pasaitza"])){
             echo "Ez da jarri Pasahitza";
             $ondo=false;
         }else{
             $pasahitza= password_hash($_POST["pasaitza"], PASSWORD_DEFAULT);
-            echo $_POST["pasaitza"];
+            
         }  
+
+        $sql = "SELECT Izena, Gmail, Pasahitza FROM Erabiltzaileak";
+        $emaitza= mysqli_query($conn,$sql);
+        
+        if (mysqli_num_rows($emaitza)> 0){
+            while($fila=mysqli_fetch_assoc($emaitza)){
+                if ($fila["Izena"] == $_POST["izena"] && $fila["Gmail"] == $_POST["email"] && $fila["Pasahitza"] == $_POST["pasaitza"]){
+                    $ondo=true;
+                }
+            }
+        }else{
+            $ondo=false;
+            echo "Db errorea";
+        }
+        mysqli_close($conn);
+
         echo "<br>";
         echo "<form method='POST' action='saioa_itxi.php'>
         <button>Itxi saioa</button>
@@ -54,7 +71,6 @@
 
     }
 
-
-    ob_end_flush();
+   // ob_end_flush();
     
 ?>
