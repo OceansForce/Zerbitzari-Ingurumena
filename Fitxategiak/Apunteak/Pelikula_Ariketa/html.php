@@ -63,6 +63,7 @@
     ?>
     <br>
     <form method="POST" action="html.php">
+        <input type="hidden" name="formulario_id" value="form1">
         <label>Pelikulak</label><br>
         <select name="pelikulak" id="pelikulak">
             <?php
@@ -77,38 +78,51 @@
         <input type="number" name="puntuak" min="0" max="10">
         <input type="submit">
     </form>
-    <?php
+    <br>
+    <form method="POST" action="html.php">
+        <input type="hidden" name="formulario_id" value="form2">
+        <button type="submit" name="atera">Atera</button>
+    </form>
+    
+   
+</body>
+</html>
+
+<?php
         $eguneratu=true;
 
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            if (0>$_POST["puntuak"]){
-                $eguneratu=false;
-                echo "Puntuak jarri gabe";
-            }else{
-                $puntu_berria=$_POST["puntuak"];
-            }
-            
-            $pelikula=$_POST["pelikulak"];  
-            
-            if($eguneratu){
-                $sql = "SELECT Id, Izena, puntuak FROM Puntuazioa WHERE Izena like '$pelikula' and Id='$id'";
-                $emaitza= mysqli_query($conn,$sql);
-                if (mysqli_num_rows($emaitza)== 0){
-                    echo "Inser";
-                    $puntuak_insert="INSERT INTO Puntuazioa (id, Izena, puntuak) VALUES ('$id', '$pelikula', '$puntu_berria')";
-                    $exekuzioa=mysqli_query($conn,$puntuak_insert);
+            if($_POST["formulario_id"]=="form1"){
+                if (0>$_POST["puntuak"]){
+                    $eguneratu=false;
+                    echo "Puntuak jarri gabe";
                 }else{
-                    $sql_eguneratu="UPDATE Puntuazioa set puntuak='$puntu_berria' WHERE Izena like '$pelikula'";
-                    $exekuzioa=mysqli_query($conn,$sql_eguneratu);
+                    $puntu_berria=$_POST["puntuak"];
                 }
-
                 
-            }
+                $pelikula=$_POST["pelikulak"];  
+                
+                if($eguneratu){
+                    $sql = "SELECT Id, Izena, puntuak FROM Puntuazioa WHERE Izena like '$pelikula' and Id='$id'";
+                    $emaitza= mysqli_query($conn,$sql);
+                    if (mysqli_num_rows($emaitza)== 0){
+                        echo "Inser";
+                        $puntuak_insert="INSERT INTO Puntuazioa (id, Izena, puntuak) VALUES ('$id', '$pelikula', '$puntu_berria')";
+                        $exekuzioa=mysqli_query($conn,$puntuak_insert);
+                    }else{
+                        $sql_eguneratu="UPDATE Puntuazioa set puntuak='$puntu_berria' WHERE Izena like '$pelikula'";
+                        $exekuzioa=mysqli_query($conn,$sql_eguneratu);
+                    }
 
-                  
+                }
+            }elseif($_POST["formulario_id"]=="form2"){
+                if (isset($_POST["atera"])){
+                    $izena="";
+                    setcookie("Erabiltzaile_Izena","",0);
+                    setcookie("id", "", 0);
+                    header("Location: ../index.html");
+                    exit();
+                }
+            }
         }  
-       
-        
     ?>
-</body>
-</html>
