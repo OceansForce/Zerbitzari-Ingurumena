@@ -13,9 +13,8 @@
         $ida_emaitza=mysqli_query($conn,$sql_ida);
 
         $ida= $ida_emaitza->fetch_assoc();
-        $ida2= $ida["id"];
-        
+       
         mysqli_close($conn);
-        return $ida2;
+        return $ida["id"];
     }
 ?>

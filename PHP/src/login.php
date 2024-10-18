@@ -25,13 +25,16 @@
 
         if ($ondo==true){
 
-            $sql = "SELECT Izena, Pasahitza FROM Erabiltzaileak";
+            $sql = "SELECT Id, Izena, Pasahitza FROM Erabiltzaileak";
             $emaitza= mysqli_query($conn,$sql);
             if (mysqli_num_rows($emaitza)> 0){
                 while($fila=mysqli_fetch_assoc($emaitza)){
                 
                     if ($fila["Izena"] == $_POST["izena"] && $fila["Pasahitza"] == $_POST["pasaitza"]){
-                        header("Location: html.php?izena=".urlencode($izena));
+                        
+                        setcookie("Erabiltzaile_Izena", $izena, 0);
+                        setcookie("id", $fila["Id"], 0);
+                        header("Location: html.php");
                         exit();
                         
                     }else{

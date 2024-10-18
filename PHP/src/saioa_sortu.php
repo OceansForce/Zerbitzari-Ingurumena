@@ -16,12 +16,15 @@
             $id_max1= $id_max["max(id)"]+1;
 
             $sql_insert="INSERT INTO Erabiltzaileak (id, Izena, Pasahitza) VALUES ('$id_max1', '$izena', '$pasaitza')";
-            $stmt = $conn->prepare($sql_insert);
             $exekutatu= mysqli_query($conn,$sql_insert);
-    
-        } else{   
-            header("Location: html.php?izena=".urlencode($izena));
+
+            setcookie("Erabiltzaile_Izena", $izena, 0);
+            setcookie("id", $id_max1, 0);
+            header("Location: html.php");
             exit();
+        } else{   
+            
+            echo "Erabiltzailea existitzen da";
         }
     }   
     mysqli_close($conn);
