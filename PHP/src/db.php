@@ -8,7 +8,7 @@
             private $serbitzaria="db";
             private $erabiltzailea="root";
             private $pazaitza="root";
-            private $datu_basea="mydatabase";
+            private $datu_basea="kotxe_jabe";
 
             
 
