@@ -98,8 +98,8 @@
 <?php
    if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($_POST["update"]=="aldatu"){
-            echo strlen($_POST["DNI"]);
-            if(strlen($_POST["DNI"])!=9 && strlen($_POST["data"])!=10 && ($_POST["oporrak"]!="true" || $_POST["oporrak"]!="false")){
+            
+            if(strlen($_POST["DNI"])!=9 || strlen($_POST["data"])!=10 || ($_POST["oporrak"]!="true" && $_POST["oporrak"]!="false")){
                 echo "Datuak gaixki daude";
             }else {
                 $sql_update="UPDATE dentistak SET izena='".$_POST["izena"]."', abizena='".$_POST["abizena"]."', dni='".$_POST["DNI"]."', jaiotze_data='".$_POST["data"]."', oporretan=".$_POST["oporrak"]." WHERE id=".$_POST["id"]."";

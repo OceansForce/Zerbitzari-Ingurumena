@@ -36,7 +36,7 @@
     <?php
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($_POST["insert"]=="dentistak"){
-                if(strlen($_POST["DNI"])==9 && strlen($_POST["data"])==10 && ($_POST["oporrak"]=="true" || $_POST["oporrak"]=="false")){
+                if(strlen($_POST["DNI"])!=9 || strlen($_POST["data"])!=10 || ($_POST["oporrak"]!="true" && $_POST["oporrak"]!="false")){
                     echo "Datuak gaixki daude";
                 }else {
                     $izena= $_POST["izena"];

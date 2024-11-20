@@ -1,0 +1,41 @@
+-- Crear la tabla dentistak
+CREATE OR REPLACE TABLE `dentistak` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+    `izena` VARCHAR(255),
+    `abizena` VARCHAR(255),
+    `dni` VARCHAR(255),
+    `jaiotze_data` DATE,
+    `oporretan` BOOLEAN,
+    PRIMARY KEY (`id`)
+);
+
+-- Crear la tabla bezeroak
+CREATE OR REPLACE TABLE `bezeroak` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+    `izena` VARCHAR(255),
+    `abizena` VARCHAR(255),
+    `dni` VARCHAR(255),
+    `jaiotze_data` DATE,
+    `dentista_id` INTEGER,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_dentista_bezeroak` FOREIGN KEY (`dentista_id`) 
+        REFERENCES `dentistak`(`id`)
+        ON UPDATE NO ACTION 
+        ON DELETE SET NULL
+);
+
+
+
+INSERT INTO `dentistak` (`izena`, `abizena`, `dni`, `jaiotze_data`, `oporretan`) VALUES
+('Aitor', 'Lopez', '12345678A', '1980-05-14', FALSE),
+('Maite', 'Garcia', '87654321B', '1975-09-23', TRUE),
+('Jon', 'Etxeberria', '56789012C', '1990-12-01', FALSE);
+
+-- Insertar datos en la tabla bezeroak
+INSERT INTO `bezeroak` (`izena`, `abizena`, `dni`, `jaiotze_data`, `dentista_id`) VALUES
+('Ana', 'Perez', '11223344D', '1995-04-22', 1),  -- Asociado con Aitor
+('Luis', 'Martinez', '22334455E', '1988-07-10', 2),  -- Asociado con Maite
+('Sara', 'Lopez', '33445566F', '2000-01-15', 3);  -- Asociado con Jon
+
+INSERT INTO `bezeroak` (`izena`, `abizena`, `dni`, `jaiotze_data`, `dentista_id`) VALUES
+('Iker', 'Perez', '11223344D', '1995-04-22', null);  -- Asociado con Aitor
