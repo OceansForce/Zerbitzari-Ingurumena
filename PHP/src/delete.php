@@ -15,11 +15,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    p{
+        color:red;
+    }
+</style>
 <body>
     <form action="Erakutsi.php" method="get">
         <button type="submit">Erakutsi</button>
     </form>
     <h1>Ezbatu Dentistak</h1><br>
+    <p>Oharra: Bearreskoa da orria berris kargatzea aldaketak ikusteko</p><br>
     <form action="delete.php" method="post">
         <input type="hidden" name="ezabatu" value="dentistak">
         <select name="dentistak" id="dentistak">
