@@ -21,11 +21,17 @@
     table, th, td {
         border: 1px solid black;
     }
+
+    p{
+        color:red;
+    }
 </style>
 <body>
     <form action="Erakutsi.php" method="get">
         <button type="submit">Erakutsi</button>
     </form>
+    <h1>Bezeroak</h1>
+    <p>Oharra: Bearreskoa da orria berris kargatzea aldaketak ikusteko</p>
     <table style="width:100%;text-align: center;">
             <tr>
                 <th>Id</th>

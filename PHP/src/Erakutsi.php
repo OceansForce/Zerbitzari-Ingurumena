@@ -30,6 +30,10 @@
     <form action="insert.php" method="get">
         <button type="submit">Gehitu</button>
     </form><br>
+    <form action="update.php" method="get">
+        <button type="submit">Aldatu</button>
+    </form><br>
+    <h1>Dentistak</h1>
     <table style="width:100%;text-align: center;">
         <tr>
             <th>id</th>
