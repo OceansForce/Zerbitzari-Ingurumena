@@ -6,6 +6,9 @@
     
     $sql_bezeroak="SELECT * FROM bezeroak";
     $bezeroak= mysqli_query($conn, $sql_bezeroak);
+
+    $sql_dentistak="SELECT * FROM dentistak";
+    $dentistak= mysqli_query($conn, $sql_dentistak);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,29 +36,29 @@
                 <th>Id_dentista</th>
             </tr>
             <?php
-                foreach ($kotxeak as $key) {
-                    echo "<tr><td>".$key["id"]."</td><td>".$key["matrikula"]."</td><td>".$key["matrikulazio_data"]."
-                    </td><td>".$key["itv"]."</td><td>".$key["jabea_id"]."
-                    </td><td> <form action='html.php' method='POST'><select name='jabeak' id='jabeak' name='form__'>";
+                foreach ($bezeroak as $key) {
+                    echo "<tr><td>".$key["id"]."</td><td>".$key["izena"]."</td><td>".$key["abizena"]."
+                    </td><td>".$key["dni"]."</td><td>".$key["jaiotze_data"]."
+                    </td><td>".$key["dentista_id"]."</td><td> <form action='bezeroak.php' method='POST'><select name='bezeroak' name='form__'>";
 
-                    if($key["jabea_id"]==null){
-                        echo "<option value='Jabe gabe,".$key["id"]."'>Jabe gabe</option>";
+                    if($key["dentista_id"]==null){
+                        echo "<option value='Dentita gabe,".$key["id"]."'>Dentita gabe</option>";
                     }
 
-                    foreach ($jabeak as $key1) {
-                        if($key1["id"]==$key["jabea_id"]){
+                    foreach ($dentistak as $key1) {
+                        if($key1["id"]==$key["dentista_id"]){
                             echo "<option value='".$key1["izena"].",".$key["id"]."'>".$key1["izena"]."</option>";
                         }
                     }
 
-                    foreach ($jabeak as $key1) {
-                        if($key1["id"]!=$key["jabea_id"]){
+                    foreach ($dentistak as $key1) {
+                        if($key1["id"]!=$key["dentista_id"]){
                             echo "<option value='".$key1["izena"].",".$key["id"]."'>".$key1["izena"]."</option>";
                         }
                     }
 
-                    if ($key["jabea_id"]!=null){
-                        echo "<option value='Jabe gabe,".$key["id"]."'>Jabe gabe</option>";
+                    if ($key["dentista_id"]!=null){
+                        echo "<option value='Dentita gabe,".$key["id"]."'>Dentita gabe</option>";
                     }
                     
                     echo "</select> <input type='submit'></form>
@@ -63,5 +66,24 @@
                 }
             ?>
         </table>
+        <?php
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                $a= explode(",", $_POST["bezeroak"]);
+        
+                if($a[0]!== "Dentita gabe"){
+                    $sql_id_atera= "SELECT id FROM dentistak WHERE izena like "."'".$a[0]."'";
+                    $id= mysqli_query($conn, $sql_id_atera);
+            
+                    foreach ($id as $key) {
+                        $sql_aldatu_dentista ="UPDATE bezeroak SET dentista_id=".$key["id"]."  WHERE id=".$a[1]." ";
+                    }
+                    mysqli_query($conn, $sql_aldatu_dentista);
+                }else {
+                    $sql_aldatu_dentista ="UPDATE bezeroak SET dentista_id=null  WHERE id=".$a[1]." ";
+                    mysqli_query($conn, $sql_aldatu_dentista);
+                }
+                
+            }
+        ?>
 </body>
 </html>
