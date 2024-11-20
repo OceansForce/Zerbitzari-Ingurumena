@@ -24,6 +24,9 @@
     <form action="delete.php" method="get">
         <button type="submit">Ezabatu</button>
     </form>
+    <form action="insert.php" method="get">
+        <button type="submit">Gehitu</button>
+    </form>
     <table style="width:100%;text-align: center;">
         <tr>
             <th>id</th>
