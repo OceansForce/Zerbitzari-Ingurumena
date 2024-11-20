@@ -21,12 +21,15 @@
     }
 </style>
 <body>
+    <form action="bezeroak.php" method="get">
+        <button type="submit">Bezeroak</button>
+    </form><br>
     <form action="delete.php" method="get">
         <button type="submit">Ezabatu</button>
-    </form>
+    </form><br>
     <form action="insert.php" method="get">
         <button type="submit">Gehitu</button>
-    </form>
+    </form><br>
     <table style="width:100%;text-align: center;">
         <tr>
             <th>id</th>

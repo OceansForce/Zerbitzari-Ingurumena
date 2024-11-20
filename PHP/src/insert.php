@@ -1,3 +1,9 @@
+<?php
+    require_once 'db.php';
+    $db= new Db;
+
+    $conn= $db->konexioa();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +12,11 @@
     <title>Document</title>
 </head>
 <body>
+    <form action="Erakutsi.php" method="get">
+        <button type="submit">Erakutsi</button>
+    </form>
+
+    <h1>Gehitu Dentista</h1>
     <form action="insert.php" method="post">
         <input type="hidden" name="insert" value="dentistak">
         <label>Izena</label><br>
@@ -19,6 +30,7 @@
         <label>Oporretan</label><br>
         True:<input type="radio" name="oporrak" value="true"><br>
         False:<input type="radio" name="oporrak" value="false"><br>
+        <input type="submit">
     </form>
 
     <?php
@@ -34,7 +46,8 @@
                     $oporrak= $_POST["oporrak"];
 
                     $sql_insert_dentistak="INSERT INTO dentistak (izena, abizena, dni, jaiotze_data, oporretan)
-                        VALUES ('".$izena."','".$abizena."', '".$_POST["data"]."', ".$_POST["itv"].")";
+                        VALUES ('".$izena."','".$abizena."', '".$dni."', '".$data."', ".$oporrak.")";
+                    mysqli_query($conn, $sql_insert_dentistak);
                 }
             }
         }

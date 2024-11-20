@@ -16,6 +16,9 @@
     <title>Document</title>
 </head>
 <body>
+    <form action="Erakutsi.php" method="get">
+        <button type="submit">Erakutsi</button>
+    </form>
     <h1>Ezbatu</h1><br>
     <form action="delete.php" method="post">
         <input type="hidden" name="ezabatu" value="dentistak">
